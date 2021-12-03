@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchCriteriaSpecification implements Specification<AdvertiseEntity> {
+public class SearchFilterCriteriaSpecification implements SearchFilterSpecification<AdvertiseEntity> {
 
     private final String searchText;
     private final int categoryId;
@@ -24,7 +24,7 @@ public class SearchCriteriaSpecification implements Specification<AdvertiseEntit
     private final LocalDate toDate;
     private final int statusId;
 
-    public SearchCriteriaSpecification(String searchText, int categoryId, String postedBy, String dateCondition, LocalDate onDate, LocalDate fromDate, LocalDate toDate, int statusId) {
+    public SearchFilterCriteriaSpecification(String searchText, int categoryId, String postedBy, String dateCondition, LocalDate onDate, LocalDate fromDate, LocalDate toDate, int statusId) {
         this.searchText = searchText;
         this.categoryId = categoryId;
         this.postedBy = postedBy;

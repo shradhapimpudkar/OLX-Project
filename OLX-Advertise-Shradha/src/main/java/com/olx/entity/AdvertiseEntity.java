@@ -1,6 +1,6 @@
 package com.olx.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,10 +33,10 @@ public class AdvertiseEntity {
     private String description;
     
     @Column(name = "adv_created_date")
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 
     @Column(name = "adv_modified_date")
-    private LocalDateTime modifiedDate;
+    private LocalDate modifiedDate;
     
     @Column(name = "adv_posted_by")
     private String posted_by;
@@ -49,7 +49,7 @@ public class AdvertiseEntity {
     }
 
 	public AdvertiseEntity(int id, String title, int categoryId, int statusId, double price, String description,
-			LocalDateTime createdDate, LocalDateTime modifiedDate, String posted_by, String username) {
+			LocalDate createdDate, LocalDate modifiedDate, String posted_by, String username) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -64,7 +64,7 @@ public class AdvertiseEntity {
 	}
 	
 	public AdvertiseEntity(String title, int categoryId, int statusId, double price, String description,
-			LocalDateTime createdDate, LocalDateTime modifiedDate, String posted_by, String username) {
+			LocalDate createdDate, LocalDate modifiedDate, String posted_by, String username) {
 		super();
 		this.title = title;
 		this.categoryId = categoryId;
@@ -125,19 +125,19 @@ public class AdvertiseEntity {
 		this.description = description;
 	}
 
-	public LocalDateTime getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(LocalDateTime createdDate) {
+	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public LocalDateTime getModifiedDate() {
+	public LocalDate getModifiedDate() {
 		return modifiedDate;
 	}
 
-	public void setModifiedDate(LocalDateTime modifiedDate) {
+	public void setModifiedDate(LocalDate modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 

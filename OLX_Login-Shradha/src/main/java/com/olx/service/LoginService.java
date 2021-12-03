@@ -1,14 +1,16 @@
 package com.olx.service;
 
+import org.springframework.http.ResponseEntity;
+
 import com.olx.dto.User;
 
 public interface LoginService {
 
-    boolean logout(String username);
+    ResponseEntity<Boolean> logout(String token);
 
     User registerUser(User user);
 
     User getUserInfo(String username);
     
-    boolean validateLogin(String authToken);
+//    boolean validateLogin(String authToken);
 }

@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Endpoint(id = "advertisestats")
-public class AdvertiseStateActuator {
+public class AdvertiseActuator {
 
     final List<Advertise> advertises = new ArrayList<>();
 

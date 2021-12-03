@@ -1,10 +1,9 @@
 package com.olx.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.olx.dto.BlackListedToken;
+import com.olx.entity.LoginDocument;
 
-public interface BlackListTokenRepo extends JpaRepository<BlackListedToken, Integer> {
+public interface BlackListTokenRepo extends MongoRepository<LoginDocument, Integer> {
 
-	BlackListedToken findBlackListedToken(String authToken);
 }

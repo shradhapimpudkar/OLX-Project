@@ -7,7 +7,7 @@ import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomInfoActuator implements InfoContributor {
+public class LoginActuator implements InfoContributor {
 
     @Autowired
     UserRepository userRepository;

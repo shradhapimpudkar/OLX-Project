@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -73,8 +74,8 @@ public class MasterDataDelegateImpl implements MasterDataDelegate {
     ////
     @Override
     public Boolean validateCategoryId(int categoryId) {
-    String url = "http://API-GATEWAY/olx/masterdata/advertise/category/validate";
-    org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+    String url = "http://API-GATEWAY/olx/masterdata/category/validate";
+    HttpHeaders headers = new HttpHeaders();
     String urlTemplate = UriComponentsBuilder.fromHttpUrl(url)
     .queryParam("categoryId",categoryId)
     .encode()
@@ -89,8 +90,8 @@ public class MasterDataDelegateImpl implements MasterDataDelegate {
     
     @Override
     public Boolean validateStatusId(int statusId) {
-    String url = "http://API-GATEWAY/olx/masterdata/advertise/status/validate";
-    org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+    String url = "http://API-GATEWAY/olx/masterdata/status/validate";
+    HttpHeaders headers = new HttpHeaders();
     String urlTemplate = UriComponentsBuilder.fromHttpUrl(url)
     .queryParam("statusId",statusId)
     .encode()
@@ -104,25 +105,23 @@ public class MasterDataDelegateImpl implements MasterDataDelegate {
     
     
     @Override
-    public ResponseEntity<String> getCategoryNameById(int categoryId) { String url = "http://API-GATEWAY/olx/masterdata/category/name";
-    org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-    String urlTemplate = UriComponentsBuilder.fromHttpUrl(url)
-    .queryParam("categoryId",categoryId)
+    public ResponseEntity<String> getCategoryNameById(int categoryId) {
+    	String url = "http://API-GATEWAY/olx/masterdata/category/name";
+    HttpHeaders headers = new HttpHeaders();
+    String urlTemplate = UriComponentsBuilder.fromHttpUrl(url).queryParam("categoryId",categoryId)
     .encode()
     .toUriString();
     HttpEntity request = new HttpEntity(headers);
     headers.setContentType(MediaType.APPLICATION_JSON);
-    ResponseEntity<String> response = restTemplate.exchange(urlTemplate,HttpMethod.GET,
-    request,
-    String.class);
+    ResponseEntity<String> response = restTemplate.exchange(urlTemplate,HttpMethod.GET,request,String.class);
     return response;
     } 
     
     
     @Override
     public ResponseEntity<String> getStatusNameById(int statusId) {
-    String url = "http://API-GATEWAY/olx/masterdata/advertise/status/name";
-    org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+    String url = "http://API-GATEWAY/olx/masterdata/status/name";
+   HttpHeaders headers = new HttpHeaders();
     String urlTemplate = UriComponentsBuilder.fromHttpUrl(url)
     .queryParam("statusId",statusId)
     .encode()

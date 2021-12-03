@@ -1,5 +1,7 @@
 package com.olx.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.olx.config.AppConfig;
 import com.olx.dto.AuthenticationRequest;
 import com.olx.dto.User;
+import com.olx.entity.LoginDocument;
+import com.olx.exception.InvalidAuthTokenException;
+import com.olx.repository.BlackListTokenRepo;
 import com.olx.security.JwtUtil;
 import com.olx.service.LoginService;
 
@@ -43,6 +48,9 @@ public class LoginController {
 
    @Autowired
    AppConfig appConfig;
+   
+   @Autowired
+   BlackListTokenRepo blackListTokenRepo;
     
     //#Query 1
     @ApiOperation(value = "Authenticate user while logging in the application.")
@@ -64,7 +72,7 @@ public class LoginController {
         }
     }
 
-    //#Query 2
+    /*//#Query 2
     @ApiOperation(value = "Logging out authenticated user from the application.")
     @DeleteMapping(value = "/logout")
     public ResponseEntity<Boolean> logout(@RequestHeader("Authorization") String authToken) {
@@ -76,8 +84,15 @@ public class LoginController {
         } else {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
+    }*/
+    
+  //#Query 2
+    @ApiOperation(value = "Logging out authenticated user from the application.")
+    @DeleteMapping(value = "/logout")
+    public ResponseEntity<Boolean> logout(@RequestHeader("Authorization") String authToken) {
+    	return loginService.logout(authToken);
     }
-
+    
     //#Query 3
     @ApiOperation(value = "Registering user in the application.")
     @PostMapping(value = "",
@@ -110,19 +125,38 @@ public class LoginController {
     //#Query to Validate Token
     @GetMapping(value = "/validate/token")
     public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String authToken) {
+    	boolean isValidToken=false;
         try {
+        
             String token = authToken.replace("Bearer ", "");
             String username = jwtUtil.extractUsername(token);
             if (username.isEmpty()) {
                 return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<>(jwtUtil.validateToken(token, userDetailsService.loadUserByUsername(username)), HttpStatus.OK);
+            isValidToken=jwtUtil.validateToken(token, userDetailsService.loadUserByUsername(username));
+           // return new ResponseEntity<>(isValidToken, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
+        
+        List<LoginDocument> blackListTokenList = blackListTokenRepo.findAll();
+        if(checkBlackListedToken(blackListTokenList, authToken)) {
+        throw new InvalidAuthTokenException();
+        } else {
+        return new ResponseEntity<Boolean>(isValidToken, HttpStatus.OK);
+        }
     }
 
-    //#Query to get Username
+    private boolean checkBlackListedToken(List<LoginDocument> blackListTokenList, String authToken) {
+    	for (LoginDocument blackListTokenDocument : blackListTokenList) {
+        	if(blackListTokenDocument.getToken().equalsIgnoreCase(authToken)) {
+        	return true;
+        	}
+        	}
+        	return false;
+	}  
+
+	//#Query to get Username
     @GetMapping(value = "/name")
     public ResponseEntity<String> getUsername(@RequestHeader("Authorization") String authToken) {
         try {

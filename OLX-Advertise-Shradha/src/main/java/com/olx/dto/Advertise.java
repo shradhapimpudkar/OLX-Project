@@ -1,6 +1,6 @@
 package com.olx.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.olx.utils.LocalDateDeserializer;
@@ -37,11 +37,11 @@ public class Advertise {
 
     @JsonDeserialize(using= LocalDateDeserializer.class)
     @ApiModelProperty(value = "Date when the advertise is created")
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 
     @JsonDeserialize(using=LocalDateDeserializer.class)
     @ApiModelProperty(value = "Date when the advertise is last updated")
-    private LocalDateTime modifiedDate;
+    private LocalDate modifiedDate;
     
     @ApiModelProperty(value = "Posted by user who has posted the advertise")
     private String posted_by;
@@ -117,19 +117,19 @@ public class Advertise {
 		this.description = description;
 	}
 
-	public LocalDateTime getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(LocalDateTime createdDate) {
+	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public LocalDateTime getModifiedDate() {
+	public LocalDate getModifiedDate() {
 		return modifiedDate;
 	}
 
-	public void setModifiedDate(LocalDateTime modifiedDate) {
+	public void setModifiedDate(LocalDate modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 
@@ -150,7 +150,7 @@ public class Advertise {
 	}
 
 	public Advertise(int id, String title, int categoryId, int statusId, String statusType, String categoryType, double price,
-			String description, LocalDateTime createdDate, LocalDateTime modifiedDate, String posted_by,
+			String description, LocalDate createdDate, LocalDate modifiedDate, String posted_by,
 			String username) {
 		super();
 		this.id = id;
@@ -167,7 +167,7 @@ public class Advertise {
 		this.username = username;
 	}
 	public Advertise(String title, int categoryId, int statusId, String statusType, String categoryType, double price,
-			String description, LocalDateTime createdDate, LocalDateTime modifiedDate, String posted_by,
+			String description, LocalDate createdDate, LocalDate modifiedDate, String posted_by,
 			String username) {
 		super();
 		this.title = title;

@@ -34,7 +34,7 @@ public class MasterDataController {
     LoginMasterDataDelegate loginDelegate;
 
     
-    //Query to create masterdata category
+    //#Query to create masterdata category
     @ApiOperation(value = "Add a new masterdata category")
     @PostMapping(value = "/category",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
@@ -61,7 +61,7 @@ public class MasterDataController {
         return new ResponseEntity<>(masterDataService.getAllCategories(), HttpStatus.OK);
     }
 
-	//10
+	//#Query 10
     @ApiOperation(value = "Returns a category by id")
     @GetMapping(value = "/category/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -108,7 +108,7 @@ public class MasterDataController {
     }
 
     @ApiOperation("Get Status Name")
-    @GetMapping(value = "/advertise/status/name{statusId}",consumes = MediaType.APPLICATION_JSON_VALUE, produces= MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/status/name{statusId}",consumes = MediaType.APPLICATION_JSON_VALUE, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getStatusNameById(@RequestParam("statusId") int statusId){
     return masterDataService.getStatusNameById(statusId);
     }

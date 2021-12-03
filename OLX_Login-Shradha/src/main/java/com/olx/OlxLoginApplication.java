@@ -12,8 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.olx.config.AppConfig;
-import com.olx.dto.BlackListedToken;
-
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -66,13 +64,7 @@ public class OlxLoginApplication {
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	@Bean
-    public RedisTemplate<Long, BlackListedToken> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<Long, BlackListedToken> template = new RedisTemplate<>();
-        template.setConnectionFactory(connectionFactory);
-        return template;
-    }
+
 
 	@Bean
 	@Profile(value = "dev")

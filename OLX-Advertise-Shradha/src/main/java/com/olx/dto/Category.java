@@ -43,8 +43,4 @@ public class Category {
                 ", category='" + category + '\'' +
                 '}';
     }
-	public Object getBody() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

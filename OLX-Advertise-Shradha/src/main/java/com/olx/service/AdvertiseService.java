@@ -39,5 +39,7 @@ public interface AdvertiseService {
 
     List<Advertise> searchAdvertisementBySearchText(String searchText);
 
-    Advertise getAdvertisementById(int adId);
+    Advertise getAdvertisementById(int adId,String username);
+
+
 }
