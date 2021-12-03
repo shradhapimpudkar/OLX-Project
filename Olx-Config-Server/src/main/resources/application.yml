@@ -1,0 +1,13 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: configuration-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/shradhapimpudkar/olx-config
+          username: shradhapimpudkar
+          password: saviour@123456
+          clone-on-start: true 
